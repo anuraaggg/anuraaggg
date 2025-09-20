@@ -9,12 +9,12 @@
 ## 📊 GitHub Stats  
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=tokyonight" height="160" alt="Anuraag’s GitHub Stats"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&layout=compact&langs_count=8&theme=tokyonight" height="160" alt="Top Languages"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=github_dark" height="160" alt="Anuraag’s GitHub Stats"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&layout=compact&langs_count=8&theme=github_dark" height="160" alt="Top Languages"/>
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=tokyonight&hide_border=false" height="160" alt="GitHub Streak"/>
+  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=github-dark&hide_border=false" height="160" alt="GitHub Streak"/>
 </p>
 
 ---
@@ -32,8 +32,3 @@
 </p>
 
 ---
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=tokyonight&hide_border=false" alt="GitHub Streak"/>
-</p>
-
-
