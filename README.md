@@ -13,13 +13,12 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&layout=compact&langs_count=8&theme=github_dark" height="160" alt="Top Languages"/>
 </p>
 
-<p align="center"> <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=tokyonight&hide_border=false" height="160" alt="GitHub Streak"/> </p>
+<p align="center"> <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=github_dark&hide_border=false" height="160" alt="GitHub Streak"/> </p>
 ---
 
 
 ## 🛠️ Tech Stack  
 
-### 🎨 Frontend Development  
 <p align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
@@ -27,34 +26,21 @@
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
   <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
-</p>
-
-### ⚙️ Backend & Database  
-<p align="center">
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
   <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"/>
   <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white"/>
   <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
-</p>
-
-### 🤖 Machine Learning & AI  
-<p align="center">
   <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
   <img src="https://img.shields.io/badge/Computer_Vision-00C7B7?style=for-the-badge&logo=openai&logoColor=white"/>
   <img src="https://img.shields.io/badge/Deep_Learning-FF4088?style=for-the-badge&logo=keras&logoColor=white"/>
   <img src="https://img.shields.io/badge/HuggingFace-FCC624?style=for-the-badge&logo=huggingface&logoColor=black"/>
-</p>
-
-### 🛠 DevOps & Tools  
-<p align="center">
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
   <img src="https://img.shields.io/badge/Google_OAuth2-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
   <img src="https://img.shields.io/badge/Gmail_API-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
 </p>
-
 
 ---
