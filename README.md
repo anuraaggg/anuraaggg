@@ -13,7 +13,10 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&layout=compact&langs_count=8&theme=github_dark" height="160" alt="Top Languages"/>
 </p>
 
-<p align="center"> <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=github_dark&hide_border=false" height="160" alt="GitHub Streak"/> </p>
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=github-dark&hide_border=false" height="160" alt="GitHub Streak"/>
+</p>
+
 ---
 
 
@@ -34,13 +37,11 @@
   <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
   <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Computer_Vision-00C7B7?style=for-the-badge&logo=openai&logoColor=white"/>
   <img src="https://img.shields.io/badge/Deep_Learning-FF4088?style=for-the-badge&logo=keras&logoColor=white"/>
   <img src="https://img.shields.io/badge/HuggingFace-FCC624?style=for-the-badge&logo=huggingface&logoColor=black"/>
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
   <img src="https://img.shields.io/badge/Google_OAuth2-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Gmail_API-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
 </p>
 
 ---
