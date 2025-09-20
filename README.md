@@ -1,8 +1,6 @@
 <!-- HEADER -->
-<h1 align="center">Hi 👋, I'm Anuraag Shankar</h1>
-<p align="center">
-  <em>CSE Student at VIT Chennai</em>
-</p>
+<h1 align="center">Hello, I'm Anuraag Shankar</h1>
+
 
 ---
 
