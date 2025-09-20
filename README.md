@@ -32,44 +32,8 @@
 </p>
 
 ---
-
-## 📌 Pinned Repositories  
-
 <p align="center">
-  <a href="https://github.com/anuraaggg/CGPAChecker">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=anuraaggg&repo=CGPAChecker&theme=tokyonight" />
-  </a>
-  <a href="https://github.com/anuraaggg/MHConnect">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=anuraaggg&repo=MHConnect&theme=tokyonight" />
-  </a>
+  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=tokyonight&hide_border=false" alt="GitHub Streak"/>
 </p>
 
-<p align="center">
-  <a href="https://github.com/anuraaggg/CyberSecEdu">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=anuraaggg&repo=CyberSecEdu&theme=tokyonight" />
-  </a>
-  <a href="https://github.com/anuraaggg/MailPilot">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=anuraaggg&repo=MailPilot&theme=tokyonight" />
-  </a>
-</p>
-
----
-
-## 🌐 Connect with me  
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/anuraag-shankar03/">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-  </a>
-  <a href="https://x.com/anuraagshankarr">
-    <img src="https://img.shields.io/badge/Twitter-000000?style=for-the-badge&logo=X&logoColor=white" alt="Twitter"/>
-  </a>
-  <a href="https://bit.ly/AnuraagShankar">
-    <img src="https://img.shields.io/badge/Portfolio-18181B?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio"/>
-  </a>
-</p>
-
----
-
-<p align="center"><i>⭐ If you find my projects useful, feel free to give them a star!</i></p>
 
