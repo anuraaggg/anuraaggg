@@ -1,5 +1,5 @@
 <!-- HEADER -->
-<h1 align="center">Hello, I'm Anuraag Shankar</h1>
+<h1 align="center">Hello, I'm Anuraag Shankar </h1>
 
 
 ---
