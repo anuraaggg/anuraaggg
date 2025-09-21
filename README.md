@@ -2,24 +2,6 @@
 <h1 align="center">Hello, I'm Anuraag Shankar </h1>
 
 
----
-
-## 📊 GitHub Stats  
-
-<p align="center">
-  <img src="https://github-readme-stats-chi-three-51.vercel.app/api?username=anuraaggg&show_icons=true&theme=github_dark" height="160" alt="Anuraag’s GitHub Stats"/>
-  <img src="https://github-readme-stats-chi-three-51.vercel.app/api/top-langs/?username=anuraaggg&layout=compact&langs_count=8&theme=github_dark" height="160" alt="Top Languages"/>
-</p>
-
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=tokyonight&hide_border=false" alt="GitHub Streak"/>
-</p>
-
-
-
-
----
-
 
 ## 🛠️ Tech Stack  
 
