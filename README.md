@@ -1,7 +1,7 @@
 <!-- HEADER -->
-<h1 align="center">Hello, I'm Anuraag Shankar </h1>
+<h1 align="center">Hello, I'm Anuraag Shankar 👋</h1>
 
-
+---
 
 ## 🛠️ Tech Stack  
 
@@ -20,16 +20,21 @@
   <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
   <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Deep_Learning-FF4088?style=for-the-badge&logo=keras&logoColor=white"/>
   <img src="https://img.shields.io/badge/HuggingFace-FCC624?style=for-the-badge&logo=huggingface&logoColor=black"/>
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
   <img src="https://img.shields.io/badge/Google_OAuth2-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
 </p>
 
+---
 
-<img src="https://metrics.lecoq.io/anuraaggg?template=classic&config.timezone=Asia/Kolkata" />
+## 📊 GitHub Metrics (Live)
 
-
+<p align="center">
+  <img
+    src="https://metrics.lecoq.io/anuraaggg?template=classic&config.timezone=Asia/Kolkata"
+    alt="GitHub Metrics"
+  />
+</p>
 
 ---
