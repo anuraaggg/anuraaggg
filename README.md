@@ -28,10 +28,7 @@
 </p>
 
 
-<img
-  src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=tokyonight&cache_seconds=86400"
-  alt="GitHub Stats"
-/>
+<img src="https://metrics.lecoq.io/anuraaggg?template=classic&config.timezone=Asia/Kolkata" />
 
 
 
