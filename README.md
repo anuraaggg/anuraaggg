@@ -27,4 +27,10 @@
   <img src="https://img.shields.io/badge/Google_OAuth2-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
 </p>
 
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=tokyonight&hide_border=true" />
+</p>
+
+
 ---
