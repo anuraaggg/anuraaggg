@@ -31,12 +31,10 @@
 ## 📊 GitHub Metrics (Live)
 
 <img
-  src="https://metrics.lecoq.io/anuraaggg
-    ?template=classic
-    &config.timezone=Asia/Kolkata
-    &cache_seconds=21600"
+  src="https://metrics.lecoq.io/anuraaggg?template=classic&config.timezone=Asia/Kolkata&cache_seconds=1800"
   alt="GitHub Metrics"
 />
+
 
 
 ---
