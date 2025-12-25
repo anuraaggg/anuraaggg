@@ -30,10 +30,8 @@
 
 ## 📊 GitHub Metrics (Live)
 
-<img
-  src="https://metrics.lecoq.io/anuraaggg?template=classic&config.timezone=Asia/Kolkata&cache_seconds=1800"
-  alt="GitHub Metrics"
-/>
+<img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=default" />
+
 
 
 
