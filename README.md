@@ -28,11 +28,6 @@
 
 ---
 
-## 📊 GitHub Metrics (Live)
-
-<img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=default" />
-
-
 
 
 ---
