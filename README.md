@@ -27,9 +27,23 @@
 </p>
 
 ---
-# 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=anuraaggg&theme=tokyonight&hide_border=false)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=anuraaggg&theme=tokyonight&hide_border=false)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&theme=tokyonight&hide_border=false&layout=compact)
+## 📊 GitHub Stats
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&theme=tokyonight&show_icons=true" />
+    </td>
+    <td>
+      <img src="https://github-readme-streak-stats.herokuapp.com/?user=anuraaggg&theme=tokyonight" />
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&theme=tokyonight&layout=compact" />
+</p>
 
 ---
