@@ -31,28 +31,17 @@
 
 <table align="center">
   <tr>
-    <td align="center" width="50%">
+    <td width="50%">
       <img
         src="https://github-readme-stats.vercel.app/api?username=anuraaggg&theme=tokyonight&show_icons=true&hide_border=true"
-        width="100%"
       />
     </td>
-    <td align="center" width="50%">
+    <td width="50%">
       <img
-        src="https://github-readme-streak-stats.herokuapp.com/?user=anuraaggg&theme=tokyonight&hide_border=true"
-        width="100%"
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&theme=tokyonight&layout=compact&hide_border=true"
       />
     </td>
   </tr>
 </table>
-
-<br/>
-
-<p align="center">
-  <img
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&theme=tokyonight&layout=compact&hide_border=true"
-    width="45%"
-  />
-</p>
 
 ---
