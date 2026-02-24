@@ -26,35 +26,51 @@ jobs:
       - name: Create Constellation Script
         run: |
           cat << 'EOF' > scripts/constellation.py
-          import random
+          import requests
+          import re
+
+          USERNAME = "anuraaggg"
+
+          url = f"https://github.com/users/{USERNAME}/contributions"
+          response = requests.get(url)
+          svg_data = response.text
+
+          rects = re.findall(r'<rect[^>]*data-count="(\d+)"[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"', svg_data)
 
           width = 900
-          height = 250
+          height = 200
+
           stars = []
 
-          for i in range(200):
-              x = random.randint(0, width)
-              y = random.randint(0, height)
-              delay = random.uniform(0, 3)
-              stars.append((x, y, delay))
+          for count, x, y in rects:
+              count = int(count)
+              if count > 0:
+                  stars.append((float(x), float(y), count))
 
-          svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
+          scale_x = 12
+          scale_y = 12
+
+          final_svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
           <rect width="100%" height="100%" fill="black"/>'''
 
-          for x, y, delay in stars:
-              svg += f'''
-              <circle cx="{x}" cy="{y}" r="1.5" fill="white">
+          for x, y, count in stars:
+              cx = x * scale_x
+              cy = y * scale_y
+
+              opacity_base = min(1, 0.3 + count * 0.1)
+
+              final_svg += f'''
+              <circle cx="{cx}" cy="{cy}" r="2" fill="white" opacity="{opacity_base}">
                   <animate attributeName="opacity"
-                           values="0.2;1;0.2"
-                           dur="3s"
-                           begin="{delay}s"
+                           values="{opacity_base * 0.5};{opacity_base};{opacity_base * 0.5}"
+                           dur="4s"
                            repeatCount="indefinite"/>
               </circle>'''
 
-          svg += "\n</svg>"
+          final_svg += "\n</svg>"
 
           with open("dist/constellation.svg", "w") as f:
-              f.write(svg)
+              f.write(final_svg)
           EOF
 
       - name: Run script
