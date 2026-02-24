@@ -33,21 +33,44 @@
 </p>
 
 ---
+
 ## 📊 GitHub Stats
 
 <table align="center">
   <tr>
-    <td width="50%">
-      <img
-        src="https://github-readme-stats.vercel.app/api?username=anuraaggg&theme=tokyonight&show_icons=true&hide_border=true"
+    <!-- Main Stats -->
+    <td width="33%">
+      <img 
+        src="https://github-readme-stats.vercel.app/api?username=anuraaggg&theme=tokyonight&show_icons=true&hide_border=true" 
       />
     </td>
-    <td width="50%">
-      <img
-        src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraaggg&theme=tokyonight&layout=compact&hide_border=true"
+
+    <!-- Streak Stats -->
+    <td width="33%">
+      <img 
+        src="https://streak-stats.demolab.com?user=anuraaggg&theme=tokyonight&hide_border=true" 
       />
+    </td>
+
+    <!-- Extended Top Languages -->
+    <td width="33%">
+      <picture>
+        <source
+          srcset="https://github-stats-extended.vercel.app/api/top-langs/?username=anuraaggg&show_icons=true&theme=dark&layout=compact&langs_count=10&hide=html,tsql,scss,css"
+          media="(prefers-color-scheme: dark)"
+        />
+        <source
+          srcset="https://github-stats-extended.vercel.app/api/top-langs/?username=anuraaggg&show_icons=true&layout=compact&langs_count=10&hide=html,tsql,scss,css"
+          media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+        />
+        <img 
+          src="https://github-stats-extended.vercel.app/api/top-langs/?username=anuraaggg&show_icons=true&layout=compact&langs_count=10&hide=html,tsql,scss,css" 
+        />
+      </picture>
     </td>
   </tr>
 </table>
 
 ---
+
+<h3 align="center">🚀 Building. Learning. Scaling.</h3>
