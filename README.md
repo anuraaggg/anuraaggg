@@ -1,12 +1,23 @@
-![Constellation](https://cdn.jsdelivr.net/gh/anuraaggg/anuraaggg@output/dist/constellation.svg?v=3)
+<h1 align="center">Anuraag Shankar</h1>
+<h3 align="center">Cloud · Full Stack · Machine Learning</h3>
+<p align="center"><i>Building scalable systems with intent.</i></p>
 
-> ✨ A constellation map of my GitHub contributions where each star represents a day I wrote code, brighter stars mean more commits. Updates daily.
+<p align="center">
+  I design and develop cloud-native systems, intelligent applications,  
+  and full-stack platforms that are production-ready and performance-focused.
+</p>
 
 ---
 
-<h1 align="center">Anuraag Shankar</h1>
-<h3 align="center">Cloud · Full Stack · Machine Learning</h3>
-<p align="center">Building scalable systems with intent.</p>
+## 🌌 Contribution Constellation
+
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/anuraaggg/anuraaggg@output/dist/constellation.svg?v=3" />
+</p>
+
+<p align="center">
+  ✨ A constellation map of my GitHub contributions — each star represents a day I wrote code, brighter stars mean more commits. Updates daily.
+</p>
 
 ---
 
@@ -14,8 +25,8 @@
 - 💻 Cloud & Distributed Systems Enthusiast  
 - 🌐 Full Stack Developer  
 - 🤖 Machine Learning Practitioner  
-- 🧠 Passionate about building scalable, production-ready systems  
-- 📊 Interested in AI-powered applications & system design  
+- 🧠 Focused on scalable, production-grade architectures  
+- 📊 Exploring AI-powered systems & intelligent automation  
 
 ---
 
