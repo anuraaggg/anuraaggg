@@ -121,7 +121,11 @@ jobs:
               path.append("Z")
               return " ".join(path)
 
+          from datetime import datetime
+          timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+
           svg = f'''<svg width="{WIDTH}" height="{HEIGHT}" xmlns="http://www.w3.org/2000/svg">
+          <!-- generated: {timestamp} -->
           <defs>
             <radialGradient id="bggrad" cx="50%" cy="40%" r="60%">
               <stop offset="0%" style="stop-color:#111111;stop-opacity:1" />
@@ -166,7 +170,6 @@ jobs:
           <rect width="100%" height="100%" fill="url(#bggrad)"/>
           '''
 
-          # Background faint stars
           for x, y, date in bg_stars:
               r = random.Random(date + "bg")
               size = r.uniform(0.8, 2.0)
@@ -178,13 +181,11 @@ jobs:
                 <animate attributeName="opacity" values="{op};{low_op};{op}" dur="{dur}s" repeatCount="indefinite"/>
               </path>\n'''
 
-          # Constellation lines
           for i, j in lines:
               x1, y1, c1, _ = stars[i]
               x2, y2, c2, _ = stars[j]
               svg += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#aaccff" stroke-width="0.5" opacity="0.2"/>\n'
 
-          # Active stars
           for x, y, count, date in stars:
               r = random.Random(date)
               outer = round(min(9.0, 3.0 + count * 0.6), 2)
@@ -211,13 +212,11 @@ jobs:
               glow_filter = "glow_strong" if count >= 3 else "glow_soft"
               path = star_shape(x, y, outer, inner)
 
-              # glow halo
               halo_path = star_shape(x, y, outer * 1.6, inner * 1.6)
               svg += f'''<path d="{halo_path}" fill="#aaccff" opacity="0.12" filter="url(#glow_strong)">
                 <animate attributeName="opacity" values="0.05;0.18;0.05" dur="{dur}s" repeatCount="indefinite"/>
               </path>\n'''
 
-              # main sparkle star
               svg += f'''<path d="{path}" fill="{color}" opacity="{opacity}" filter="url(#{glow_filter})">
                 <animate attributeName="opacity" values="{low_op};{opacity};{mid_op};{opacity};{low_op}" dur="{dur}s" repeatCount="indefinite"/>
                 <animateTransform attributeName="transform" type="rotate"
@@ -225,7 +224,6 @@ jobs:
                   dur="{dur2}s" repeatCount="indefinite"/>
               </path>\n'''
 
-              # bright core dot
               svg += f'''<circle cx="{x:.1f}" cy="{y:.1f}" r="{round(inner*1.2,2)}" fill="{core}" opacity="{opacity}">
                 <animate attributeName="opacity" values="{mid_op};1.0;{mid_op}" dur="{dur2}s" repeatCount="indefinite"/>
               </circle>\n'''
@@ -260,3 +258,8 @@ jobs:
           git status
           git commit -m "Update constellation [skip ci]" || echo "No changes to commit"
           git push origin output --force
+
+      - name: Purge jsdelivr cache
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/anuraaggg/anuraaggg@output/dist/constellation.svg"
+          echo "jsdelivr cache purged"
