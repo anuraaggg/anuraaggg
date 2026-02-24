@@ -31,14 +31,19 @@ jobs:
 
           USERNAME = "anuraaggg"
 
+          # Fetch GitHub contribution SVG
           url = f"https://github.com/users/{USERNAME}/contributions"
           response = requests.get(url)
           svg_data = response.text
 
-          rects = re.findall(r'<rect[^>]*data-count="(\d+)"[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"', svg_data)
+          # Extract contribution squares
+          rects = re.findall(
+              r'<rect[^>]*data-count="(\d+)"[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"',
+              svg_data
+          )
 
-          width = 900
-          height = 200
+          width = 800
+          height = 180
 
           stars = []
 
@@ -47,23 +52,22 @@ jobs:
               if count > 0:
                   stars.append((float(x), float(y), count))
 
-          scale_x = 12
-          scale_y = 12
-
           final_svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
           <rect width="100%" height="100%" fill="black"/>'''
 
+          # Preserve original grid structure
           for x, y, count in stars:
-              cx = x * scale_x
-              cy = y * scale_y
+              cx = x + 20
+              cy = y + 20
 
-              opacity_base = min(1, 0.3 + count * 0.1)
+              # Brighter for higher contributions
+              opacity_base = min(1, 0.4 + count * 0.08)
 
               final_svg += f'''
-              <circle cx="{cx}" cy="{cy}" r="2" fill="white" opacity="{opacity_base}">
+              <circle cx="{cx}" cy="{cy}" r="3" fill="white" opacity="{opacity_base}">
                   <animate attributeName="opacity"
-                           values="{opacity_base * 0.5};{opacity_base};{opacity_base * 0.5}"
-                           dur="4s"
+                           values="{opacity_base * 0.6};{opacity_base};{opacity_base * 0.6}"
+                           dur="3s"
                            repeatCount="indefinite"/>
               </circle>'''
 
