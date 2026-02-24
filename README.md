@@ -1,1 +1,7 @@
 ![Constellation](https://raw.githubusercontent.com/anuraaggg/anuraaggg/output/dist/constellation.svg)
+
+> ✨ A constellation map of my GitHub contributions — each star represents a day I wrote code, brighter stars mean more commits. Updates daily.
+
+Anuraag Shankar  
+Cloud · Full Stack · Machine Learning  
+Building scalable systems with intent.
