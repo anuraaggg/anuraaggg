@@ -1,4 +1,4 @@
-![Constellation](https://cdn.jsdelivr.net/gh/anuraaggg/anuraaggg@output/dist/constellation.svg)
+![Constellation](https://cdn.jsdelivr.net/gh/anuraaggg/anuraaggg@output/dist/constellation.svg))
 
 > ✨ A constellation map of my GitHub contributions where each star represents a day I wrote code, brighter stars mean more commits. Updates daily.
 
