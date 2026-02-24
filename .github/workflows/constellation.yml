@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -27,57 +29,107 @@ jobs:
         run: |
           cat << 'EOF' > scripts/constellation.py
           import requests
-          import re
+          import os
+          import math
 
           USERNAME = "anuraaggg"
+          TOKEN = os.environ["GITHUB_TOKEN"]
 
-          url = f"https://github.com/users/{USERNAME}/contributions"
-          response = requests.get(url)
-          svg_data = response.text
+          query = """
+          query($login: String!) {
+            user(login: $login) {
+              contributionsCollection {
+                contributionCalendar {
+                  weeks {
+                    contributionDays {
+                      contributionCount
+                      date
+                      weekday
+                    }
+                  }
+                }
+              }
+            }
+          }
+          """
 
-          rects = re.findall(
-              r'<rect[^>]*data-count="(\d+)"[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"',
-              svg_data
+          headers = {"Authorization": f"Bearer {TOKEN}"}
+
+          response = requests.post(
+              "https://api.github.com/graphql",
+              json={"query": query, "variables": {"login": USERNAME}},
+              headers=headers
           )
+          data = response.json()
+          weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
 
-          width = 900
-          height = 220
+          cell_size = 14
+          width = len(weeks) * cell_size + 60
+          height = 7 * cell_size + 60
 
-          final_svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100%" height="100%" fill="black"/>'''
+          stars = []
+          for week_index, week in enumerate(weeks):
+              for day in week["contributionDays"]:
+                  count = day["contributionCount"]
+                  x = week_index * cell_size + 30
+                  y = day["weekday"] * cell_size + 30
+                  stars.append((x, y, count))
 
-          # Draw faint grid (all days)
-          for count, x, y in rects:
-              cx = float(x) + 15
-              cy = float(y) + 15
+          svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="#0d1117"/>
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>'''
 
-              final_svg += f'''
-              <circle cx="{cx}" cy="{cy}" r="2" fill="white" opacity="0.05"/>'''
+          # Draw constellation lines between nearby active stars
+          active_stars = [(x, y, c) for x, y, c in stars if c > 0]
+          drawn_lines = set()
+          for i, (x1, y1, c1) in enumerate(active_stars):
+              for j, (x2, y2, c2) in enumerate(active_stars):
+                  if i >= j:
+                      continue
+                  dist = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+                  if dist < cell_size * 2.2:
+                      key = (min(i,j), max(i,j))
+                      if key not in drawn_lines:
+                          drawn_lines.add(key)
+                          svg += f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="white" stroke-width="0.4" opacity="0.15"/>'
 
-          # Draw bright animated stars for real contributions
-          for count, x, y in rects:
-              count = int(count)
+          # Draw all dots (faint grid)
+          for x, y, count in stars:
+              svg += f'<circle cx="{x}" cy="{y}" r="1.5" fill="white" opacity="0.05"/>'
+
+          # Draw active stars with glow + pulse
+          for x, y, count in stars:
               if count > 0:
-                  cx = float(x) + 15
-                  cy = float(y) + 15
-
-                  opacity_base = min(1, 0.4 + count * 0.08)
-
-                  final_svg += f'''
-                  <circle cx="{cx}" cy="{cy}" r="3" fill="white" opacity="{opacity_base}">
-                      <animate attributeName="opacity"
-                               values="{opacity_base * 0.6};{opacity_base};{opacity_base * 0.6}"
-                               dur="3s"
-                               repeatCount="indefinite"/>
+                  opacity = round(min(1.0, 0.35 + count * 0.1), 2)
+                  low = round(opacity * 0.5, 2)
+                  radius = round(min(4.5, 2.5 + count * 0.3), 2)
+                  dur = round(2.5 + (hash((x, y)) % 20) * 0.15, 2)
+                  svg += f'''<circle cx="{x}" cy="{y}" r="{radius}" fill="white" opacity="{opacity}" filter="url(#glow)">
+                    <animate attributeName="opacity"
+                             values="{low};{opacity};{low}"
+                             dur="{dur}s"
+                             repeatCount="indefinite"/>
                   </circle>'''
 
-          final_svg += "\n</svg>"
+          svg += "</svg>"
 
           with open("dist/constellation.svg", "w") as f:
-              f.write(final_svg)
+              f.write(svg)
+
+          print(f"Done! {len(active_stars)} active stars, {len(drawn_lines)} constellation lines.")
           EOF
 
       - name: Run script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/constellation.py
 
       - name: Commit and push
@@ -86,5 +138,5 @@ jobs:
           git config --global user.email "actions@github.com"
           git checkout -B output
           git add dist/constellation.svg
-          git commit -m "Update constellation"
+          git commit -m "Update constellation [skip ci]" || echo "No changes to commit"
           git push origin output --force
