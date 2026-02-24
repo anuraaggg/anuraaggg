@@ -16,13 +16,13 @@
 
 ---
 
-## GitHub Analytics
+## 📈 GitHub Analytics
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=anuraaggg&show_icons=true&theme=github_dark&hide_border=true" height="160"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=anuraaggg&layout=compact&theme=github_dark&hide_border=true" height="160"/>
+  <img src="https://github-readme-stats.zcy.dev/api?username=anuraaggg&show_icons=true&theme=tokyonight" height="160"/>
+  <img src="https://github-readme-stats.zcy.dev/api/top-langs?username=anuraaggg&show_icons=true&locale=en&layout=compact&theme=tokyonight" height="160"/>
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=anuraaggg&theme=github-dark&hide_border=true" height="160"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=anuraaggg&theme=tokyonight" height="160"/>
 </p>
