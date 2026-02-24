@@ -71,15 +71,13 @@ jobs:
           HEIGHT = 400
           PADDING = 40
 
-          random.seed(42)
-
           active_days = [d for d in days if d["contributionCount"] > 0]
           inactive_days = [d for d in days if d["contributionCount"] == 0]
 
-          def seeded_pos(seed_str, padding=PADDING):
+          def seeded_pos(seed_str):
               r = random.Random(seed_str)
-              x = r.uniform(padding, WIDTH - padding)
-              y = r.uniform(padding, HEIGHT - padding)
+              x = r.uniform(PADDING, WIDTH - PADDING)
+              y = r.uniform(PADDING, HEIGHT - PADDING)
               return x, y
 
           stars = []
@@ -89,69 +87,141 @@ jobs:
               stars.append((x, y, count, day["date"]))
 
           bg_stars = []
-          sample = random.sample(inactive_days, min(60, len(inactive_days)))
+          sample = random.Random(99).sample(inactive_days, min(80, len(inactive_days)))
           for day in sample:
               x, y = seeded_pos(day["date"] + "_bg")
-              bg_stars.append((x, y))
+              bg_stars.append((x, y, day["date"]))
 
           CONNECT_DIST = 80
           lines = []
+          seen = set()
           for i, (x1, y1, c1, d1) in enumerate(stars):
               neighbors = []
               for j, (x2, y2, c2, d2) in enumerate(stars):
-                  if i >= j:
+                  if i == j:
                       continue
                   dist = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
                   if dist < CONNECT_DIST:
                       neighbors.append((dist, j))
               neighbors.sort()
               for _, j in neighbors[:2]:
-                  lines.append((i, j))
+                  key = (min(i,j), max(i,j))
+                  if key not in seen:
+                      seen.add(key)
+                      lines.append((i, j))
+
+          def star_shape(cx, cy, outer_r, inner_r, points=4):
+              """Generate a 4-pointed star (cross) path for a sparkle look"""
+              path = []
+              for i in range(points * 2):
+                  angle = math.pi * i / points - math.pi / 2
+                  r = outer_r if i % 2 == 0 else inner_r
+                  x = cx + r * math.cos(angle)
+                  y = cy + r * math.sin(angle)
+                  path.append(f"{'M' if i == 0 else 'L'}{x:.2f},{y:.2f}")
+              path.append("Z")
+              return " ".join(path)
 
           svg = f'''<svg width="{WIDTH}" height="{HEIGHT}" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="bggrad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style="stop-color:#0d1b2a;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#010408;stop-opacity:1" />
+            <radialGradient id="bggrad" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#010306;stop-opacity:1" />
             </radialGradient>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+
+            <filter id="glow_strong" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="4" result="blur1"/>
+              <feGaussianBlur stdDeviation="8" result="blur2"/>
               <feMerge>
-                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="blur2"/>
+                <feMergeNode in="blur1"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+
+            <filter id="glow_soft" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+
+            <filter id="glow_tiny" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="1" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
           </defs>
+
           <rect width="100%" height="100%" fill="url(#bggrad)"/>
           '''
 
-          for x, y in bg_stars:
-              r = random.Random(f"{x}{y}")
-              op = round(r.uniform(0.08, 0.25), 2)
-              radius = round(r.uniform(0.5, 1.2), 2)
-              svg += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius}" fill="white" opacity="{op}"/>\n'
+          # Background faint stars — tiny 4-pointed sparkles
+          for x, y, date in bg_stars:
+              r = random.Random(date + "bg")
+              size = r.uniform(0.8, 2.0)
+              op = round(r.uniform(0.1, 0.3), 2)
+              low_op = round(op * 0.3, 2)
+              dur = round(r.uniform(2.5, 6.0), 2)
+              path = star_shape(x, y, size, size * 0.35)
+              svg += f'''<path d="{path}" fill="white" opacity="{op}" filter="url(#glow_tiny)">
+                <animate attributeName="opacity" values="{op};{low_op};{op}" dur="{dur}s" repeatCount="indefinite"/>
+              </path>\n'''
 
+          # Constellation lines
           for i, j in lines:
               x1, y1, c1, _ = stars[i]
               x2, y2, c2, _ = stars[j]
-              svg += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#4a9eff" stroke-width="0.6" opacity="0.25"/>\n'
+              svg += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#4a9eff" stroke-width="0.5" opacity="0.2"/>\n'
 
+          # Active stars — 4-pointed sparkle stars with strong glow + twinkle
           for x, y, count, date in stars:
-              radius = round(min(5.5, 1.8 + count * 0.4), 2)
-              opacity = round(min(1.0, 0.5 + count * 0.08), 2)
-              low_op = round(opacity * 0.45, 2)
-              dur = round(2.0 + random.Random(date).uniform(0, 2.5), 2)
+              r = random.Random(date)
+              outer = round(min(9.0, 3.0 + count * 0.6), 2)
+              inner = round(outer * 0.25, 2)
+              opacity = round(min(1.0, 0.55 + count * 0.07), 2)
+              low_op = round(opacity * 0.3, 2)
+              mid_op = round(opacity * 0.7, 2)
+              dur = round(r.uniform(1.5, 4.0), 2)
+              dur2 = round(dur * 0.6, 2)
+
+              # color by contribution intensity
               if count >= 8:
                   color = "#ffffff"
-              elif count >= 4:
-                  color = "#cce8ff"
-              elif count >= 2:
-                  color = "#99ccff"
+                  core = "#ffffff"
+              elif count >= 5:
+                  color = "#e8f4ff"
+                  core = "#ffffff"
+              elif count >= 3:
+                  color = "#a8d4ff"
+                  core = "#dff0ff"
               else:
                   color = "#6699cc"
+                  core = "#aaccee"
 
-              svg += f'''<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius}" fill="{color}" opacity="{opacity}" filter="url(#glow)">
-                <animate attributeName="opacity" values="{low_op};{opacity};{low_op}" dur="{dur}s" repeatCount="indefinite"/>
+              glow_filter = "glow_strong" if count >= 3 else "glow_soft"
+              path = star_shape(x, y, outer, inner)
+
+              # glow halo behind star
+              halo_path = star_shape(x, y, outer * 1.6, inner * 1.6)
+              svg += f'''<path d="{halo_path}" fill="{color}" opacity="0.12" filter="url(#glow_strong)">
+                <animate attributeName="opacity" values="0.05;0.18;0.05" dur="{dur}s" repeatCount="indefinite"/>
+              </path>\n'''
+
+              # main sparkle star
+              svg += f'''<path d="{path}" fill="{color}" opacity="{opacity}" filter="url(#{glow_filter})">
+                <animate attributeName="opacity" values="{low_op};{opacity};{mid_op};{opacity};{low_op}" dur="{dur}s" repeatCount="indefinite"/>
+                <animateTransform attributeName="transform" type="rotate"
+                  values="0 {x:.1f} {y:.1f};15 {x:.1f} {y:.1f};0 {x:.1f} {y:.1f};-15 {x:.1f} {y:.1f};0 {x:.1f} {y:.1f}"
+                  dur="{dur2}s" repeatCount="indefinite"/>
+              </path>\n'''
+
+              # bright core dot
+              svg += f'''<circle cx="{x:.1f}" cy="{y:.1f}" r="{round(inner*1.2,2)}" fill="{core}" opacity="{opacity}">
+                <animate attributeName="opacity" values="{mid_op};1.0;{mid_op}" dur="{dur2}s" repeatCount="indefinite"/>
               </circle>\n'''
 
           svg += "</svg>"
@@ -159,7 +229,7 @@ jobs:
           with open("dist/constellation.svg", "w") as f:
               f.write(svg)
 
-          print(f"Generated: {len(stars)} active stars, {len(bg_stars)} background stars, {len(lines)} lines.")
+          print(f"Done! {len(stars)} stars, {len(bg_stars)} bg stars, {len(lines)} lines.")
           EOF
 
       - name: Run script
@@ -184,8 +254,3 @@ jobs:
           git status
           git commit -m "Update constellation [skip ci]" || echo "No changes to commit"
           git push origin output --force
-```
-
-Replace your existing file with this, then run the workflow again. The SVG will be at:
-```
-https://raw.githubusercontent.com/anuraaggg/anuraaggg/output/dist/constellation.svg
