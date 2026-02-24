@@ -62,7 +62,6 @@ jobs:
           data = response.json()
           weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
 
-          # Collect contribution days
           days = []
           for week in weeks:
               for day in week["contributionDays"]:
@@ -72,11 +71,8 @@ jobs:
           HEIGHT = 400
           PADDING = 40
 
-          # Use contribution count as seed for deterministic but natural-looking placement
           random.seed(42)
 
-          # Place stars: active days get real positions scattered naturally
-          # inactive days become faint background stars
           active_days = [d for d in days if d["contributionCount"] > 0]
           inactive_days = [d for d in days if d["contributionCount"] == 0]
 
@@ -86,21 +82,18 @@ jobs:
               y = r.uniform(padding, HEIGHT - padding)
               return x, y
 
-          # Generate positions for all active stars
           stars = []
           for day in active_days:
               x, y = seeded_pos(day["date"])
               count = day["contributionCount"]
               stars.append((x, y, count, day["date"]))
 
-          # Background faint stars (random, from inactive days — pick ~60)
           bg_stars = []
           sample = random.sample(inactive_days, min(60, len(inactive_days)))
           for day in sample:
               x, y = seeded_pos(day["date"] + "_bg")
               bg_stars.append((x, y))
 
-          # Find constellation lines: connect active stars within distance threshold
           CONNECT_DIST = 80
           lines = []
           for i, (x1, y1, c1, d1) in enumerate(stars):
@@ -111,7 +104,6 @@ jobs:
                   dist = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
                   if dist < CONNECT_DIST:
                       neighbors.append((dist, j))
-              # connect to closest 2 neighbors max to avoid clutter
               neighbors.sort()
               for _, j in neighbors[:2]:
                   lines.append((i, j))
@@ -129,39 +121,26 @@ jobs:
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
-            <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="1.2" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
           </defs>
-
-          <!-- Sky background -->
           <rect width="100%" height="100%" fill="url(#bggrad)"/>
           '''
 
-          # Background faint stars
           for x, y in bg_stars:
               r = random.Random(f"{x}{y}")
               op = round(r.uniform(0.08, 0.25), 2)
               radius = round(r.uniform(0.5, 1.2), 2)
               svg += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius}" fill="white" opacity="{op}"/>\n'
 
-          # Constellation lines
           for i, j in lines:
               x1, y1, c1, _ = stars[i]
               x2, y2, c2, _ = stars[j]
               svg += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#4a9eff" stroke-width="0.6" opacity="0.25"/>\n'
 
-          # Active stars
           for x, y, count, date in stars:
               radius = round(min(5.5, 1.8 + count * 0.4), 2)
               opacity = round(min(1.0, 0.5 + count * 0.08), 2)
               low_op = round(opacity * 0.45, 2)
               dur = round(2.0 + random.Random(date).uniform(0, 2.5), 2)
-              # color: more contributions = warmer/brighter
               if count >= 8:
                   color = "#ffffff"
               elif count >= 4:
@@ -192,7 +171,21 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git checkout -B output
+
+          cp dist/constellation.svg /tmp/constellation.svg
+
+          git fetch origin
+          git checkout -B output origin/output 2>/dev/null || git checkout -B output
+
+          mkdir -p dist
+          cp /tmp/constellation.svg dist/constellation.svg
+
           git add dist/constellation.svg
+          git status
           git commit -m "Update constellation [skip ci]" || echo "No changes to commit"
           git push origin output --force
+```
+
+Replace your existing file with this, then run the workflow again. The SVG will be at:
+```
+https://raw.githubusercontent.com/anuraaggg/anuraaggg/output/dist/constellation.svg
