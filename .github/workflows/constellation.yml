@@ -111,7 +111,6 @@ jobs:
                       lines.append((i, j))
 
           def star_shape(cx, cy, outer_r, inner_r, points=4):
-              """Generate a 4-pointed star (cross) path for a sparkle look"""
               path = []
               for i in range(points * 2):
                   angle = math.pi * i / points - math.pi / 2
@@ -124,10 +123,10 @@ jobs:
 
           svg = f'''<svg width="{WIDTH}" height="{HEIGHT}" xmlns="http://www.w3.org/2000/svg">
           <defs>
-          <radialGradient id="bggrad" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" style="stop-color:#111111;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
-          </radialGradient>
+            <radialGradient id="bggrad" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" style="stop-color:#111111;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+            </radialGradient>
 
             <filter id="glow_strong" x="-100%" y="-100%" width="300%" height="300%">
               <feGaussianBlur stdDeviation="4" result="blur1"/>
@@ -159,7 +158,7 @@ jobs:
           <rect width="100%" height="100%" fill="url(#bggrad)"/>
           '''
 
-          # Background faint stars — tiny 4-pointed sparkles
+          # Background faint stars
           for x, y, date in bg_stars:
               r = random.Random(date + "bg")
               size = r.uniform(0.8, 2.0)
@@ -175,9 +174,9 @@ jobs:
           for i, j in lines:
               x1, y1, c1, _ = stars[i]
               x2, y2, c2, _ = stars[j]
-              svg += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#4a9eff" stroke-width="0.5" opacity="0.2"/>\n'
+              svg += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#aaccff" stroke-width="0.5" opacity="0.2"/>\n'
 
-          # Active stars — 4-pointed sparkle stars with strong glow + twinkle
+          # Active stars
           for x, y, count, date in stars:
               r = random.Random(date)
               outer = round(min(9.0, 3.0 + count * 0.6), 2)
@@ -188,26 +187,25 @@ jobs:
               dur = round(r.uniform(1.5, 4.0), 2)
               dur2 = round(dur * 0.6, 2)
 
-              # color by contribution intensity
               if count >= 8:
                   color = "#ffffff"
                   core = "#ffffff"
               elif count >= 5:
-                  color = "#e8f4ff"
+                  color = "#ddeeff"
                   core = "#ffffff"
               elif count >= 3:
-                  color = "#a8d4ff"
-                  core = "#dff0ff"
+                  color = "#aaccff"
+                  core = "#ddeeff"
               else:
-                  color = "#6699cc"
-                  core = "#aaccee"
+                  color = "#7799cc"
+                  core = "#aabbdd"
 
               glow_filter = "glow_strong" if count >= 3 else "glow_soft"
               path = star_shape(x, y, outer, inner)
 
-              # glow halo behind star
+              # glow halo
               halo_path = star_shape(x, y, outer * 1.6, inner * 1.6)
-              svg += f'''<path d="{halo_path}" fill="{color}" opacity="0.12" filter="url(#glow_strong)">
+              svg += f'''<path d="{halo_path}" fill="#aaccff" opacity="0.12" filter="url(#glow_strong)">
                 <animate attributeName="opacity" values="0.05;0.18;0.05" dur="{dur}s" repeatCount="indefinite"/>
               </path>\n'''
 
