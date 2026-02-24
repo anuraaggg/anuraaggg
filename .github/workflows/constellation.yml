@@ -31,45 +31,45 @@ jobs:
 
           USERNAME = "anuraaggg"
 
-          # Fetch GitHub contribution SVG
           url = f"https://github.com/users/{USERNAME}/contributions"
           response = requests.get(url)
           svg_data = response.text
 
-          # Extract contribution squares
           rects = re.findall(
               r'<rect[^>]*data-count="(\d+)"[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"',
               svg_data
           )
 
-          width = 800
-          height = 180
-
-          stars = []
-
-          for count, x, y in rects:
-              count = int(count)
-              if count > 0:
-                  stars.append((float(x), float(y), count))
+          width = 900
+          height = 220
 
           final_svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
           <rect width="100%" height="100%" fill="black"/>'''
 
-          # Preserve original grid structure
-          for x, y, count in stars:
-              cx = x + 20
-              cy = y + 20
-
-              # Brighter for higher contributions
-              opacity_base = min(1, 0.4 + count * 0.08)
+          # Draw faint grid (all days)
+          for count, x, y in rects:
+              cx = float(x) + 15
+              cy = float(y) + 15
 
               final_svg += f'''
-              <circle cx="{cx}" cy="{cy}" r="3" fill="white" opacity="{opacity_base}">
-                  <animate attributeName="opacity"
-                           values="{opacity_base * 0.6};{opacity_base};{opacity_base * 0.6}"
-                           dur="3s"
-                           repeatCount="indefinite"/>
-              </circle>'''
+              <circle cx="{cx}" cy="{cy}" r="2" fill="white" opacity="0.05"/>'''
+
+          # Draw bright animated stars for real contributions
+          for count, x, y in rects:
+              count = int(count)
+              if count > 0:
+                  cx = float(x) + 15
+                  cy = float(y) + 15
+
+                  opacity_base = min(1, 0.4 + count * 0.08)
+
+                  final_svg += f'''
+                  <circle cx="{cx}" cy="{cy}" r="3" fill="white" opacity="{opacity_base}">
+                      <animate attributeName="opacity"
+                               values="{opacity_base * 0.6};{opacity_base};{opacity_base * 0.6}"
+                               dur="3s"
+                               repeatCount="indefinite"/>
+                  </circle>'''
 
           final_svg += "\n</svg>"
 
