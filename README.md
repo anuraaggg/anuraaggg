@@ -4,8 +4,6 @@
 
 ---
 
-## Contribution Constellation
-
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/anuraaggg/anuraaggg@output/dist/constellation.svg?v=3" />
 </p>
