@@ -15,12 +15,6 @@
 ---
 
 ## 📈 GitHub Analytics
-
-<p align="center">
-  <img src="https://github-readme-stats.zcy.dev/api?username=anuraaggg&show_icons=true&theme=tokyonight" height="160"/>
-  <img src="https://github-readme-stats.zcy.dev/api/top-langs?username=anuraaggg&show_icons=true&locale=en&layout=compact&theme=tokyonight" height="160"/>
-</p>
-
 <p align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=anuraaggg&theme=tokyonight" height="160"/>
 </p>
