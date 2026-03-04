@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  A constellation map of my GitHub contributions — each star represents a day I wrote code, brighter stars mean more commits. Updates daily.
+  A constellation map of my GitHub contributions where each star represents a day I wrote code, brighter stars mean more commits. Updates daily.
 </p>
 
 ---
