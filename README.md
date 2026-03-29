@@ -13,8 +13,3 @@
 </p>
 
 ---
-
-## 📈 GitHub Analytics
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=anuraaggg&theme=tokyonight" height="160"/>
-</p>
